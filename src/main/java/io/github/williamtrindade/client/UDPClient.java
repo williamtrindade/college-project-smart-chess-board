@@ -26,9 +26,9 @@ class UDPClient {
         sendPacket(clientSocket, sendData, IPAddress);
 
         // Receive Datagrama from server
-        String modifiedSentence = receivePacket(clientSocket);
+        String status = receivePacket(clientSocket);
 
-        System.out.println("STATUS:" + modifiedSentence);
+        System.out.println("STATUS:" + status);
         clientSocket.close();
 
     }

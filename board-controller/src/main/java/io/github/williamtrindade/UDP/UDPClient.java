@@ -1,8 +1,8 @@
 package io.github.williamtrindade.UDP;
 
-import java.io.BufferedReader;
+import io.github.williamtrindade.Models.Match;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -12,9 +12,8 @@ import java.net.InetAddress;
  */
 class UDPClient {
     public static void main(String[] args) throws IOException {
-
         // Get Data to send
-        byte[] sendData = readNotation().getBytes();
+        byte[] sendData = Match.readNotation().getBytes();
 
         // Create Socket
         DatagramSocket clientSocket = new DatagramSocket();
@@ -28,7 +27,7 @@ class UDPClient {
         // Receive Datagrama from server
         String status = receivePacket(clientSocket);
 
-        System.out.println("STATUS:" + status);
+        System.out.println("STATUS: " + status);
         clientSocket.close();
 
     }
@@ -44,10 +43,4 @@ class UDPClient {
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
         clientSocket.send(sendPacket);
     }
-
-    private static String readNotation() throws IOException {
-        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-        return inFromUser.readLine();
-    }
-
 }

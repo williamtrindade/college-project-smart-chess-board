@@ -1,9 +1,14 @@
 package io.github.williamtrindade.UDP;
 
+import io.github.williamtrindade.DAO.MoveDAO;
+import io.github.williamtrindade.Models.Match;
+import io.github.williamtrindade.Models.Move;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.sql.SQLException;
 
 @SuppressWarnings("InfiniteLoopStatement")
 public class UPDServer {
@@ -16,19 +21,27 @@ public class UPDServer {
         byte[] sendData;
 
         while (true) {
-            DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);
+            DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
             // Receive Chess Notation
-            String notation = receivePacket(serverSocket, receivePacket);
+            String moveString = receivePacket(serverSocket, receivePacket);
+            Move move = new Match().getMoveFromString(moveString);
+
+            // Save to database
+            MoveDAO moveDAO = new MoveDAO();
+
+            sendData = "MOVEMENT SAVED".getBytes();
+            try {
+                moveDAO.create(move.getWhite(), move.getBlack(), move.getChessMatchId());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
             // Receive IP Address
             InetAddress IPAddress = receivePacket.getAddress();
 
             // Receive Port
             int port = receivePacket.getPort();
-
-            String response = "OK";
-            sendData = response.getBytes();
 
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
             serverSocket.send(sendPacket);

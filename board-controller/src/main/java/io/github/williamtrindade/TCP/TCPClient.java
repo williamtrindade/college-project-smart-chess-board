@@ -1,5 +1,7 @@
 package io.github.williamtrindade.TCP;
 
+import io.github.williamtrindade.Models.Match;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,16 +10,30 @@ import java.net.Socket;
 
 public class TCPClient {
     public static void main(String[] args) throws IOException {
-        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-        String sentence = inFromUser.readLine();
-
+        
+        // Serialize input to bytes
+        String sendData = Match.readNotation();
+        
+        // Create socket
         Socket clientSocket = new Socket("localhost",6789);
-        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        
+        // Send to server
+        sendPacket(clientSocket, sendData);
 
-        outToServer.writeBytes(sentence + '\n');
-        String modifiedSentence = inFromServer.readLine();
-        System.out.println("FROM SERVER: " + modifiedSentence);
+        // Receive Data from server
+        String status = receivePacket(clientSocket);
+
+        System.out.println("STATUS: " + status);
         clientSocket.close();
+    }
+
+    private static String receivePacket(Socket clientSocket) throws IOException {
+        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        return inFromServer.readLine();
+    }
+
+    private static void sendPacket(Socket clientSocket, String sendData) throws IOException {
+        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+        outToServer.writeBytes(sendData + '\n');
     }
 }

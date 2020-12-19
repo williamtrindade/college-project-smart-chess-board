@@ -6,18 +6,18 @@ import java.sql.SQLException;
 
 public class ConnectionDB {
 
-    public static Connection getConexao() throws ClassNotFoundException {
-        Connection conexao = null;
+    private static final String DATABASE_PATH = "/home/dev4/college/college-project-smart-chess-board/web-app/database/database.sqlite";
+
+    public static Connection connect() {
         try {
-            Class.forName("org.postgresql.Driver");
-            String url ="jdbc:postgresql://localhost:5432/db_programacao_web";
-            String user="postgres";
-            String password = "";
-            conexao = DriverManager.getConnection(url, user, password);
+            return DriverManager.getConnection("jdbc:sqlite:" + DATABASE_PATH);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-        return conexao;
+        return null;
     }
 
+    public static void main(String[] args) {
+        connect();
+    }
 }

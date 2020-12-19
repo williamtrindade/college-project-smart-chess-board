@@ -32,7 +32,7 @@ class ChessMatch extends Model
      */
     public function moves(): HasMany
     {
-        return $this->hasMany(Move::class,'match_id','id');
+        return $this->hasMany(Move::class,'chess_match_id','id');
     }
 
     /**

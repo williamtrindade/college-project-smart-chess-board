@@ -21,7 +21,8 @@ class CreateMovesTable extends Migration
             $table
                 ->foreign('chess_match_id')
                 ->references('id')
-                ->on('chess_matches');
+                ->on('chess_matches')
+                ->onDelete('CASCADE');
             $table->timestamps();
         });
     }

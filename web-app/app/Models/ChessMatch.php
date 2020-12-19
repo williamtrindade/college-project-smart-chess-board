@@ -42,8 +42,8 @@ class ChessMatch extends Model
     public function getWinnerAttribute($value): string
     {
         if ($value) {
-            return $value == self::WHITE_WINNER ? 'Brancas' : 'Pretas';
+            return $value == self::WHITE_WINNER ? 'White' : 'Black';
         }
-        return 'Em andamento';
+        return 'Playing';
     }
 }

@@ -1,4 +1,4 @@
-package io.github.williamtrindade.client;
+package io.github.williamtrindade.UDP;
 
 import java.io.BufferedReader;
 import java.io.IOException;

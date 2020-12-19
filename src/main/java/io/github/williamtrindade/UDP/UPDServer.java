@@ -1,4 +1,4 @@
-package io.github.williamtrindade.server;
+package io.github.williamtrindade.UDP;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

@@ -1,4 +1,4 @@
-package io.github.williamtrindade.server;
+package io.github.williamtrindade.TCP;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

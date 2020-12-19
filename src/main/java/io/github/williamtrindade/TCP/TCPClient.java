@@ -1,4 +1,4 @@
-package io.github.williamtrindade.client;
+package io.github.williamtrindade.TCP;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -8,16 +8,16 @@ import java.net.Socket;
 
 public class TCPClient {
     public static void main(String[] args) throws IOException {
-        String sentence;
-        String modifiedSentence;
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+        String sentence = inFromUser.readLine();
+
         Socket clientSocket = new Socket("localhost",6789);
         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        sentence = inFromUser.readLine();
-        outToServer.writeBytes(sentence +'\n');
-        modifiedSentence = inFromServer.readLine();
-        System.out.println("FROM SERVER: " +modifiedSentence);
+
+        outToServer.writeBytes(sentence + '\n');
+        String modifiedSentence = inFromServer.readLine();
+        System.out.println("FROM SERVER: " + modifiedSentence);
         clientSocket.close();
     }
 }

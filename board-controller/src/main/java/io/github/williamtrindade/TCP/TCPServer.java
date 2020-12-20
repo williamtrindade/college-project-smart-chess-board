@@ -1,5 +1,6 @@
 package io.github.williamtrindade.TCP;
 
+import io.github.williamtrindade.DAO.MoveDAO;
 import io.github.williamtrindade.Models.Match;
 import io.github.williamtrindade.Models.Move;
 
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 
 @SuppressWarnings("InfiniteLoopStatement")
 public class TCPServer {
@@ -26,12 +28,18 @@ public class TCPServer {
             // Cadeia de saída
             DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 
-            // Get String from client
+            // Get Move from client
             Move move = new Match().getMoveFromString(inFromClient.readLine());
-            System.out.println(move.getChessMatchId());
-            System.out.println(move.getWhite());
 
-            outToClient.writeBytes("sasa" + '\n');
+            // Save to database
+            try {
+                MoveDAO moveDAO = new MoveDAO();
+                moveDAO.create(move.getWhite(), move.getBlack(), move.getChessMatchId());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            outToClient.writeBytes("MOVEMENT SAVED" + '\n');
         }
     }
 }

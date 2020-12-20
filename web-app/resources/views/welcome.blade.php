@@ -78,7 +78,7 @@
                                                     <tbody>
                                                         @foreach ($chess_match->moves as $move)
                                                             <tr>
-                                                                <td>{{ $move->id }}</td>
+                                                                <td>{{ $loop->index + 1 }}</td>
                                                                 <td>{{ $move->white }}</td>
                                                                 <td>{{ $move->black }}</td>
                                                             </tr>

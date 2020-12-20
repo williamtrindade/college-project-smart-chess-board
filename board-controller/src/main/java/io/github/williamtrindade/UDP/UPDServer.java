@@ -28,10 +28,9 @@ public class UPDServer {
             Move move = new Match().getMoveFromString(moveString);
 
             // Save to database
-            MoveDAO moveDAO = new MoveDAO();
-
             sendData = "MOVEMENT SAVED".getBytes();
             try {
+                MoveDAO moveDAO = new MoveDAO();
                 moveDAO.create(move.getWhite(), move.getBlack(), move.getChessMatchId());
             } catch (SQLException e) {
                 e.printStackTrace();

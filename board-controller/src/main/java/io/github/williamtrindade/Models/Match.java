@@ -16,7 +16,7 @@ public class Match {
         String[] input = move.split(" ");
         String white = input[0];
         String black = input[1];
-        int matchId = parseInt(input[2]);
+        int matchId = parseInt(input[2].trim());
         return new Move(white, black, matchId);
     }
 }

@@ -78,7 +78,7 @@
                                                     <tbody>
                                                         <?php $__currentLoopData = $chess_match->moves; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $move): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <tr>
-                                                                <td><?php echo e($move->id); ?></td>
+                                                                <td><?php echo e($loop->index + 1); ?></td>
                                                                 <td><?php echo e($move->white); ?></td>
                                                                 <td><?php echo e($move->black); ?></td>
                                                             </tr>

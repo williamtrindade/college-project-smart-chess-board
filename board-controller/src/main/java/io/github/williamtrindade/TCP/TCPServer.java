@@ -1,6 +1,5 @@
 package io.github.williamtrindade.TCP;
 
-import io.github.williamtrindade.DAO.MoveDAO;
 import io.github.williamtrindade.Models.Match;
 import io.github.williamtrindade.Models.Move;
 
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.SQLException;
 
 @SuppressWarnings("InfiniteLoopStatement")
 public class TCPServer {

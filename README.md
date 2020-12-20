@@ -11,7 +11,7 @@ ___
 ### Cliente TCP/UDP e Servidor TCP/UDP (JAVA)
 Um controlador que identifica as jogadas feitas no tabuleiro, envia ao servidor que registra as jogadas em um banco SQLite.
 O cliente pode declarar um vencedor ao final da partida.
-![server/client](https://i.ibb.co/VNfvbCV/image.png)
+![server/client](https://i.ibb.co/wLshrBC/image.png)
 ___
 
 ### Aplicação web (PHP)

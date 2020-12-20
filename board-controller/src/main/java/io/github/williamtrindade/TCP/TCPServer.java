@@ -18,6 +18,9 @@ public class TCPServer {
         // Welcome socket
         ServerSocket welcomeSocket = new ServerSocket(6789);
 
+        // output string
+        String outputString = "";
+
         while (true) {
             // Connection Socket
             Socket connectionSocket = welcomeSocket.accept();
@@ -28,18 +31,19 @@ public class TCPServer {
             // Cadeia de saída
             DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 
-            // Get Move from client
-            Move move = new Match().getMoveFromString(inFromClient.readLine());
-
-            // Save to database
-            try {
-                MoveDAO moveDAO = new MoveDAO();
-                moveDAO.create(move.getWhite(), move.getBlack(), move.getChessMatchId());
-            } catch (SQLException e) {
-                e.printStackTrace();
+            // received string
+            String receivedString = inFromClient.readLine();
+            int opCode = Integer.parseInt(receivedString.split(" ")[0].trim());
+            if (opCode == Match.OP_CODE_WINNER) {
+                Match.saveWinnerToDatabase(receivedString);
+                outputString = "WINNER SAVED";
+            }
+            if (opCode == Match.OP_CODE_MOVE) {
+                Move.saveMoveToDatabase(receivedString);
+                outputString = "MOVEMENT SAVED";
             }
 
-            outToClient.writeBytes("MOVEMENT SAVED" + '\n');
+            outToClient.writeBytes(outputString + '\n');
         }
     }
 }

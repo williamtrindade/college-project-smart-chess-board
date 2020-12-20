@@ -1,5 +1,6 @@
 package io.github.williamtrindade.UDP;
 
+import io.github.williamtrindade.DAO.MatchDAO;
 import io.github.williamtrindade.DAO.MoveDAO;
 import io.github.williamtrindade.Models.Match;
 import io.github.williamtrindade.Models.Move;
@@ -11,29 +12,28 @@ import java.net.InetAddress;
 import java.sql.SQLException;
 
 @SuppressWarnings("InfiniteLoopStatement")
-public class UPDServer {
+public class UDPServer {
     public static void main(String[] args) throws IOException {
 
         // Create socket
         DatagramSocket serverSocket = new DatagramSocket(9876);
 
         byte[] receiveData = new byte[1024];
-        byte[] sendData;
+        byte[] sendData = new byte[1024];
 
         while (true) {
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
             // Receive Chess Notation
-            String moveString = receivePacket(serverSocket, receivePacket);
-            Move move = new Match().getMoveFromString(moveString);
-
-            // Save to database
-            sendData = "MOVEMENT SAVED".getBytes();
-            try {
-                MoveDAO moveDAO = new MoveDAO();
-                moveDAO.create(move.getWhite(), move.getBlack(), move.getChessMatchId());
-            } catch (SQLException e) {
-                e.printStackTrace();
+            String receivedString = receivePacket(serverSocket, receivePacket);
+            int opCode = Integer.parseInt(receivedString.split(" ")[0].trim());
+            if (opCode == Match.OP_CODE_WINNER) {
+                Match.saveWinnerToDatabase(receivedString);
+                sendData = "WINNER SAVED".getBytes();
+            }
+            if (opCode == Match.OP_CODE_MOVE) {
+                Move.saveMoveToDatabase(receivedString);
+                sendData = "MOVEMENT SAVED".getBytes();
             }
 
             // Receive IP Address
@@ -46,6 +46,7 @@ public class UPDServer {
             serverSocket.send(sendPacket);
         }
     }
+
 
     private static String receivePacket(DatagramSocket serverSocket, DatagramPacket receivePacket) throws IOException {
         serverSocket.receive(receivePacket);

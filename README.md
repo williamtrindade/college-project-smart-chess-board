@@ -13,5 +13,5 @@ Um controlador que identifica as jogadas feitas no tabuleiro.
 ### Servidor TCP/UDP (JAVA)
 Registra as jogadas em um banco SQLite.
 
-### Aplicação web (php)
+### Aplicação web (PHP)
 Feita para os jogadores poderem acessar os jogos e realizar uma análise posterior dos jogos.

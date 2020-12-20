@@ -10,7 +10,13 @@ Assim fazendo com que os jogadores possam rever as jogadas feitas no tabuleiro u
 ___
 ### Cliente TCP/UDP e Servidor TCP/UDP (JAVA)
 Um controlador que identifica as jogadas feitas no tabuleiro, envia ao servidor que registra as jogadas em um banco SQLite.
-O cliente pode declarar um vencedor ao final da partida.
+O cliente pode declarar um vencedor ao final da partida.  
+#### Declarar Vencedor:  
+> 1 MATCH_ID WINNER(1|2)
+
+#### Enviar Jogada:   
+> 2 WHITE_MOVE BLACK_MOVE MATCH_ID
+
 ![server/client](https://i.ibb.co/wLshrBC/image.png)
 ___
 

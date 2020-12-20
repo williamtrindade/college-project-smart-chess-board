@@ -17,4 +17,4 @@ ___
 ### Aplicação web (PHP)
 Feita para os jogadores poderem acessar os jogos e realizar uma análise posterior dos jogos.
 
-![webapp](https://i.ibb.co/8B3cf6p/photo5113918711131121816.jpg)
+![webapp](https://i.ibb.co/7GZTXnx/image.png)

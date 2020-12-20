@@ -16,4 +16,4 @@ Registra as jogadas em um banco SQLite.
 ### Aplicação web (PHP)
 Feita para os jogadores poderem acessar os jogos e realizar uma análise posterior dos jogos.
 
-![blob:https://web.whatsapp.com/e09e7dbc-83fa-4a89-a649-cdd639f3a7da]
+![webapp](blob:https://web.whatsapp.com/e09e7dbc-83fa-4a89-a649-cdd639f3a7da)

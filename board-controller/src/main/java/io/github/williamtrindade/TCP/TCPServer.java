@@ -20,17 +20,15 @@ public class TCPServer {
         String outputString = "";
 
         while (true) {
-            // Connection Socket
+            // Connection Socket to handshake
             Socket connectionSocket = welcomeSocket.accept();
 
             // Cadeia de entrada
             BufferedReader inFromClient =  new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 
-            // Cadeia de saída
-            DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-
-            // received string
+            // Le a linha do docket
             String receivedString = inFromClient.readLine();
+
             int opCode = Integer.parseInt(receivedString.split(" ")[0].trim());
             if (opCode == Match.OP_CODE_WINNER) {
                 Match.saveWinnerToDatabase(receivedString);
@@ -41,6 +39,8 @@ public class TCPServer {
                 outputString = "MOVEMENT SAVED";
             }
 
+            // Cadeia de saída
+            DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
             outToClient.writeBytes(outputString + '\n');
         }
     }

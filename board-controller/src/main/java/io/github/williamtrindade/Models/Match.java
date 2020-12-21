@@ -24,8 +24,8 @@ public class Match {
 
     public static Move getMoveFromString(String move) {
         String[] input = move.split(" ");
-        String white = input[1];
-        String black = input[2];
+        String white = input[1].trim();
+        String black = input[2].trim();
         int matchId = parseInt(input[3].trim());
         return new Move(white, black, matchId);
     }

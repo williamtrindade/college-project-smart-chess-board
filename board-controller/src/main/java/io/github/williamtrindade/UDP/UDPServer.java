@@ -1,7 +1,5 @@
 package io.github.williamtrindade.UDP;
 
-import io.github.williamtrindade.DAO.MatchDAO;
-import io.github.williamtrindade.DAO.MoveDAO;
 import io.github.williamtrindade.Models.Match;
 import io.github.williamtrindade.Models.Move;
 
@@ -9,7 +7,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.sql.SQLException;
 
 @SuppressWarnings("InfiniteLoopStatement")
 public class UDPServer {
@@ -46,7 +43,6 @@ public class UDPServer {
             serverSocket.send(sendPacket);
         }
     }
-
 
     private static String receivePacket(DatagramSocket serverSocket, DatagramPacket receivePacket) throws IOException {
         serverSocket.receive(receivePacket);

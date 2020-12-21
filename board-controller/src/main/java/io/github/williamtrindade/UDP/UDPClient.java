@@ -29,7 +29,6 @@ class UDPClient {
 
         System.out.println("STATUS: " + status);
         clientSocket.close();
-
     }
 
     private static String receivePacket(DatagramSocket clientSocket) throws IOException {

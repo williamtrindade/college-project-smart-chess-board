@@ -5,7 +5,7 @@ em implementar um cliente e servidor TCP e UDP com uma ideia criativa.
 
 ## Ideia
 Um tabuleiro de xadrez que identifica os lances dos jogadores e envia para um servidor TCP/UDP. 
-Assim fazendo com que os jogadores possam rever as jogadas feitas no tabuleiro utilizando de notação agébrica.
+Assim fazendo com que os jogadores possam rever as jogadas feitas no tabuleiro utilizando de notação algébrica.
 
 ___
 ### Cliente TCP/UDP e Servidor TCP/UDP (JAVA)

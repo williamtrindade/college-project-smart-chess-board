@@ -1,7 +1,6 @@
 package io.github.williamtrindade.Models;
 
 import io.github.williamtrindade.DAO.MatchDAO;
-import io.github.williamtrindade.DAO.MoveDAO;
 
 import java.io.BufferedReader;
 import java.io.IOException;

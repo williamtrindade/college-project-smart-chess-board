@@ -11,8 +11,6 @@ import java.util.Calendar;
 public class MatchDAO {
 
     public void declareWinner(Integer matchId, Integer winnerColor) throws SQLException {
-        System.out.println(matchId);
-        System.out.println(winnerColor);
         Connection connection = ConnectionDB.connect();
         assert connection != null;
         String sql = "UPDATE chess_matches SET winner=?, updated_at=? WHERE id=?;";
